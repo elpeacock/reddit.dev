@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $my_name = 'Liz';
+    $data['my_name'] = $name;
+
+    //cameron's preferred way of passing data to the view
+    return view('my-first-view')->with($data);
+
+
 });
 
 Route::get('/sayhello/{name?}', function ($name = 'Lassen') {
@@ -32,5 +38,11 @@ Route::get('/increment/{number?}', function($number = 5) {
 
 Route::get('/add/{firstnumber?}/{secondnumber?}', function($firstnumber = 3, $secondnumber = 8) {
 	return $firstnumber + $secondnumber;
+});
+
+Route::get('/rolldice/{guess?}', function($guess = 3) {
+	$data['roll'] = rand(1, 6);
+	$data['guess'] = $guess;
+	return view('roll-dice')->with($data);
 });
 
