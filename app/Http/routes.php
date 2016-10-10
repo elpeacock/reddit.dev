@@ -26,3 +26,7 @@ Route::get('/uppercase/{word?}', function($word = 'Lassen') {
 	return strtoupper($word); 
 });
 
+Route::get('/increment/{number?}', function($number = 5) {
+	return $number += 1;
+});
+
