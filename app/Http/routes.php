@@ -22,4 +22,7 @@ Route::get('/sayhello/{name?}', function ($name = 'Lassen') {
 	return 'Hello ' . $name;
 }); 
 
+Route::get('/uppercase/{word?}', function($word = 'Lassen') {
+	return strtoupper($word); 
+});
 
