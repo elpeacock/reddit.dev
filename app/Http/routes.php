@@ -30,3 +30,7 @@ Route::get('/increment/{number?}', function($number = 5) {
 	return $number += 1;
 });
 
+Route::get('/add/{firstnumber?}{secondnumber?}', function($firstnumber = 3, $secondnumber = 8) {
+	return $firstnumber + $secondnumber;
+});
+
