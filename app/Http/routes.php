@@ -43,6 +43,7 @@ Route::get('/add/{firstnumber?}/{secondnumber?}', function($firstnumber = 3, $se
 Route::get('/rolldice/{guess?}', function($guess = 3) {
 	$data['roll'] = rand(1, 6);
 	$data['guess'] = $guess;
+	$data['correct'] = ($data['roll'] == $data['guess']);
 	return view('roll-dice')->with($data);
 });
 
