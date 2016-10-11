@@ -28,17 +28,9 @@ Route::get('/sayhello/{name?}', function ($name = 'Lassen') {
     return 'Hello ' . $name;
 }); 
 
-Route::get('/uppercase/{word?}', function($word = 'Lassen') {
-    $data['word'] = $word;
-    $data['uppercase'] = strtoupper($word); 
-    return view('uppercase')->with($data);
-});
+Route::get('/uppercase/{word?}', 'homeController@showUppercase'); 
 
-Route::get('/increment/{number?}', function($number = 5) {
-    $data['number'] = $number;
-    $data['incremented'] = $number + 1;
-    return view('increment')->with($data);
-});
+Route::get('/increment/{number?}', 'homeController@showIncrement'); 
 
 Route::get('/add/{firstnumber?}/{secondnumber?}', function($firstnumber = 3, $secondnumber = 8) {
     return $firstnumber + $secondnumber;
