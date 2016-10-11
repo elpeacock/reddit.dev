@@ -22,28 +22,32 @@ Route::get('/', function () {
 });
 
 Route::get('/sayhello/{name?}', function ($name = 'Lassen') {
-	if ($name == 'Chris') {
-		return redirect('/');
-	}
-	return 'Hello ' . $name;
+    if ($name == 'Chris') {
+        return redirect('/');
+    }
+    return 'Hello ' . $name;
 }); 
 
 Route::get('/uppercase/{word?}', function($word = 'Lassen') {
-	return strtoupper($word); 
+    $data['word'] = $word;
+    $data['uppercase'] = strtoupper($word); 
+    return view('uppercase')->with($data);
 });
 
 Route::get('/increment/{number?}', function($number = 5) {
-	return $number + 1;
+    $data['number'] = $number;
+    $data['incremented'] = $number + 1;
+    return view('increment')->with($data);
 });
 
 Route::get('/add/{firstnumber?}/{secondnumber?}', function($firstnumber = 3, $secondnumber = 8) {
-	return $firstnumber + $secondnumber;
+    return $firstnumber + $secondnumber;
 });
 
 Route::get('/rolldice/{guess?}', function($guess = 3) {
-	$data['roll'] = rand(1, 6);
-	$data['guess'] = $guess;
-	$data['correct'] = ($data['roll'] == $data['guess']);
-	return view('roll-dice')->with($data);
+    $data['roll'] = rand(1, 6);
+    $data['guess'] = $guess;
+    $data['correct'] = ($data['roll'] == $data['guess']);
+    return view('roll-dice')->with($data);
 });
 
