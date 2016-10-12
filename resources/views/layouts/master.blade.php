@@ -11,7 +11,7 @@
 	
 	<div class="container">
     	
-    	@yield('form')
+    	@yield('content')
 	
 	</div>
     
