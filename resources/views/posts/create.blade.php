@@ -6,7 +6,7 @@
 
 @stop
 
-@section('form')
+@section('content')
     
     <form class="form" method="POST" action="{{ action('PostsController@store') }}">
         {!! csrf_field() !!}
