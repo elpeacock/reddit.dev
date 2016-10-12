@@ -43,3 +43,4 @@ Route::get('/rolldice/{guess?}', function($guess = 3) {
     return view('roll-dice')->with($data);
 });
 
+Route::resource('posts', 'PostsController');
