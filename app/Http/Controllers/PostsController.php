@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return 'All the Posts';
+        $posts = Post::all();
+        $data = ['posts' => $posts];
+        
+        return view('posts.index')->with($data);
+
     }
 
     /**
@@ -37,9 +42,17 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $inputs = $request->all();
-        var_dump($inputs);
-        return back()->withInput();
+        
+        $post = new Post;
+
+        $post->created_by = 1;
+        $post->title = $request->title;
+        $post->url = $request->url;
+        $post->content = $request->content;
+        
+        $post->save();
+
+        return redirect()->action('PostsController@index');
         // return view('posts.create');
     }
 
@@ -51,7 +64,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return 'show the post with id # $id';
+        $post = Post::find($id);
+        $data = ['post' => $post];
+
+        return view('posts.show')->with($data);
     }
 
     /**
@@ -62,7 +78,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        return 'edit the post with id # $id';
+        $post = Post::find($id);
+        $data = ['post' => $post];
+
+        return view('posts.edit')->with($data);
     }
 
     /**
@@ -74,7 +93,15 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'update the post with id # $id and request $request';
+        $post = Post::find($id);
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->url = $request->url;
+
+        $post->save();
+
+        return redirect()->action('PostsController@show', $post->id);
     }
 
     /**
