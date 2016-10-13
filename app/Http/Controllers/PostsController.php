@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
         $data = ['posts' => $posts];
         
         return view('posts.index')->with($data);
@@ -43,16 +43,28 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         
+        $rules = array(
+            'title' => 'required | max:100',
+            'content' => 'required',
+            // 'url' => 'required',
+            );
+
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. See messages below input fields and try again.');
+        $this->validate($request, $rules);
+        $request->session()->forget('ERROR_MESSAGE');
+
         $post = new Post;
 
         $post->created_by = 1;
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;
-        
+
         $post->save();
 
-        return redirect()->action('PostsController@index');
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post was saved successfully');
+
+        return redirect()->action('PostsController@show', $post->id);
         // return view('posts.create');
     }
 
@@ -95,11 +107,23 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
+        $rules = array(
+            'title' => 'required | max:100',
+            'content' => 'required',
+            // 'url' => 'required',
+            );
+
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. See messages below input fields and try again.');
+        $this->validate($request, $rules);
+        $request->session()->forget('ERROR_MESSAGE');
+
         $post->title = $request->title;
         $post->content = $request->content;
         $post->url = $request->url;
 
         $post->save();
+
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post was saved successfully');
 
         return redirect()->action('PostsController@show', $post->id);
     }
