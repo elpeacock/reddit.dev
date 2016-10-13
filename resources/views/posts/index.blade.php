@@ -5,21 +5,31 @@
 @stop
 
 @section('content')
+
+    <h1>Posts</h1>
     
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Content</th>
-            <th>url</th>
-        </tr>
+    <table class="table">
+
     @foreach($posts as $post)
+
         <tr>
-            <td>{{ $post->title }}</td>
+            <a href="{{ action('PostsController@show', $post->id) }}">
+                
+                <h3><td>{{ $post->title }}</td></h3>
+
+            </a>
+            
             <td>{{ $post->content }}</td>
+            
             <td>{{ $post->url }}</td>
+
         </tr>
+        <p>{{ $post}}
+    
     @endforeach
 
     </table>
 
+    <div class='pagination'> {!! $posts->render() !!} </div>
+    
 @stop
