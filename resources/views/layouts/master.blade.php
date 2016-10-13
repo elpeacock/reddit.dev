@@ -4,18 +4,57 @@
 
     @yield('title')
     
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {{-- bootstrap cdn --}}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- sidebar style --}}
+    <link href='/css/sidebar.css' rel="stylesheet">
+
 </head>
 
 <body>
-	
-	<div class="container">
-    	
-    	@yield('content')
-	
-	</div>
-    
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {{-- @include('partials.navbar') --}}
+    
+    <div class="container">
+
+        @if(session()->has('SUCCESS_MESSAGE'))
+
+            <div class="alert alert-success">
+
+                <p>{{ session('SUCCESS_MESSAGE') }}</p>
+
+            </div>
+
+        @endif
+
+        @if(session()->has('ERROR_MESSAGE'))
+
+            <div class="alert alert-danger">
+
+                <p>{{ session('ERROR_MESSAGE') }}</p>
+
+            </div>
+
+        @endif
+        
+        @yield('content')
+    
+    </div>
+    
+    {{-- jquery --}}
+    <script src='/js/jquery.js' type="text/javascript"></script>
+
+    {{-- bootstrap javascript cdn --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        console.log('working');
+    });
+    </script>
 </body>
 </html>
