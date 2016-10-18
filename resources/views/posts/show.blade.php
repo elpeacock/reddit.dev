@@ -9,6 +9,8 @@
 	<h1>{{ $post->title }}</h1>
 	<p>{{ $post->content}}</p>
 	<p>{{ $post->url }}</p>
+	<p>Posted by: {{ $post->user->name }}</p>
+	<p>Posted at: {{ $post->created_at }}</p>
 
 	<div class="col-md-6" id="buttonHolder">
         
