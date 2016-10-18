@@ -23,8 +23,11 @@
             
             <td>{{ $post->url }}</td>
 
+            <td>Created by: {{ $post->user->name }}</td>
+            
+            <td>Posted at: {{ $post->created_at }}</td>
+        
         </tr>
-        <p>{{ $post}}
     
     @endforeach
 
