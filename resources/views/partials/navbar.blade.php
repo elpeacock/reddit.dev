@@ -1,43 +1,73 @@
+<nav class="navbar navbar-default" role="navigation">
 
+    <div class="navbar-header">
 
-<div id="wrapper">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Start Bootstrap
-                </a>
-            </li>
-            <li>
-                <a href="#">Dashboard</a>
-            </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ul>
+            <span class="sr-only">Toggle navigation</span>
+            
+            <span class="icon-bar"></span>
+            
+            <span class="icon-bar"></span>
+            
+            <span class="icon-bar"></span>
+        
+        </button>
+
+        <a class="navbar-brand" href="{{ action('PostsController@index') }}">Lassen Reddit</a>
+
     </div>
-    <!-- /#sidebar-wrapper -->
 
-</div>
-<!-- /#wrapper -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        
+        <ul class="nav navbar-nav">
+            
+            <li class="active"><a href="#">Sign Up</a></li>
+            
+            <li><a href="#">Log In</a></li>
+            
+            @if (Auth::check())
+            <li class="dropdown">
+                
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                
+                <ul class="dropdown-menu">
+                    
+                    <li><a href="#">Account Info</a></li>
+                    
+                    <li><a href="#">Your Posts</a></li>
+                    
+                    <li class="divider"></li>
+                    
+                    <li><a href="#">Create A Post</a></li>                   
+                
+                </ul>
+            
+            </li>
+            @endif
+       
+        </ul>
+        
+        <div class="col-sm-3 col-md-3 pull-right">
+            
+            <form class="navbar-form" role="search">
+                
+                <div class="input-group">
+                    
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    
+                    <div class="input-group-btn">
+                        
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    
+                    </div>
+                
+                </div>
+            
+            </form>
+        
+        </div>        
+    
+    </div>
 
-
-
+</nav>
