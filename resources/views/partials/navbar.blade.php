@@ -22,24 +22,24 @@
         
         <ul class="nav navbar-nav">
             
-            <li class="active"><a href="#">Sign Up</a></li>
+            <li class="active"><a href="{{ action('Auth\AuthController@getRegister') }}">Sign Up</a></li>
             
-            <li><a href="#">Log In</a></li>
+            <li><a href="{{ action('Auth\AuthController@getLogin') }}">Log In</a></li>
             
             @if (Auth::check())
             <li class="dropdown">
                 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}<b class="caret"></b></a>
                 
                 <ul class="dropdown-menu">
                     
-                    <li><a href="#">Account Info</a></li>
+                    <li><a href="{{ action('UsersController@show', Auth::id()) }}">Account Info</a></li>
                     
-                    <li><a href="#">Your Posts</a></li>
+                    <li><a href="{{ action('PostsController@create') }}">Create A Post</a></li>
                     
                     <li class="divider"></li>
                     
-                    <li><a href="#">Create A Post</a></li>                   
+                    <li><a href="{{ action('Auth\AuthController@getLogout') }}">Log Out</a></li>                   
                 
                 </ul>
             
@@ -50,11 +50,11 @@
         
         <div class="col-sm-3 col-md-3 pull-right">
             
-            <form class="navbar-form" role="search">
+            <form class="navbar-form" role="search" method="GET" action="{{ action('PostsController@index') }}">
                 
                 <div class="input-group">
                     
-                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ isset($searchTerm) ? $searchTerm : '' }}">
                     
                     <div class="input-group-btn">
                         
