@@ -19,21 +19,20 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         
-        $posts = Post::with('user')->paginate(10);
+        $posts;
+
+        $searchTerm = $request['search'];
         // for search bar functionality
-        if (isset($request['search'])) {
+        if (isset($request['search']) && !is_null($request['search'])) {
 
-            $search = Post::searchPosts($searchTerm);
+            $search = Post::searchPosts($searchTerm)->paginate(10);
+            // dd($search);
 
-            if ($search->get()) {
-
-                $posts = $search->paginate(10);
+            // $posts = $search->paginate(10);
             
-            } else {
+        } else {
             
-                $posts = Post::with('user')->paginate(10);
-
-            }
+            $posts = Post::with('user')->paginate(10);
         
         }
 
@@ -76,7 +75,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         
-
         $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. See messages below input fields and try again.');
         $this->validate($request, $rules);
         $request->session()->forget('ERROR_MESSAGE');
